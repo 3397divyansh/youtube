@@ -7,17 +7,26 @@ const app=express()
 import mongoose from "mongoose"
 // import {DB_NAME} from "./constants"
 import connectDB from "./db/index.js" 
+
 dotenv.config({
-    path:'./env'
-})  
-connectDB().then(
+    path:'./.env'
+})
+// connectDB()
+connectDB().then( ()=>{
+
+    app.on("error" ,(error)=>{
+        console.log("error mee",error);
+        throw error;
+       }),
+
     app.listen(process.env.PORT || 8000 ,()=>{
         console.log(`server is running ${process.env.PORT}`)
     })
-
+}
 ).catch(
     (err)=>{
-        console.log("mogo failed",err)
+        console.log("mogo failed bhai",err)
+        process.exit(1)
     }
 )
 
@@ -41,6 +50,7 @@ connectDB().then(
 
 
 // import express from "express"
+// import { DB_NAME } from "./constants.js"
 // const app=express()
  
 // ;(async()=>{
@@ -61,6 +71,6 @@ connectDB().then(
   
 //     catch(error){
 //         console.error("error",error)
-//         throw err
+//         throw error
 //     }
 // })()

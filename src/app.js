@@ -2,29 +2,39 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
+
 const app=express()
  app.use(cors({
     origin:process.env.CORS_ORIGIN,
     credentials:true
  }))
 
-
- app.use(epxress.json({
+//configuring json and url files to et data from them
+app.use(express.json({
     limit:"16kb"
- }))
+ }));
 
- app.use(epxress.urlencoded({
+ app.use(express.urlencoded({
     extended:true,//obj ki andar obj 
     limit:"16kb"
- }))
+ }));
 
  app.use(express.static("public"))
- app.use ( cookieParser())
+ app.use ( cookieParser()) ///helps in data from server to cookie or web browser
 
 
 
 
- 
 
+ //routes
 
- export {app}
+ import userRouter from './routes/user.routes.js'
+
+ //route declaration 
+
+ app.use("/api/v1/users",userRouter)
+
+//http://localhost:8000/api/user/register
+// register from useer routes
+
+ export   {app}
