@@ -17,11 +17,11 @@ const uploadOnCloudinary=async(localFilePath)=>{
 
         //file has beeen uploaded sucessully 
         console.log("file uploaded on cloudinary ",response.url)
-
+        fs.unlinkSync(localFilePath);
         return response 
     }
     catch (error){
-
+       console.log("pata ni yrr")
         fs.unlinkSync(localFilePath)//remove the locally saved temp file as the upload operation got failed bc server will have uneccesaary file maliicious file
         return   null
 
